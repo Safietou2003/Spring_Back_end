@@ -10,16 +10,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
-@RequestMapping("/api/sessions")
-public interface SessionController {
+@RestController
+@RequestMapping("/api/session")
+@Tag(name = "Sessions", description = "Opérations liées aux sessions")
+public class SessionControllerImpl {
 
-    @GetMapping("/v1")
-    ResponseEntity<Map<String, Object>> getAll(
-            @PageableDefault Pageable pageable,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size
-    );
+    @Autowired
+    private SessionService sessionService;
+
+    @PostMapping
+    @Operation(summary = "Créer une session")
+    public ResponseEntity<Session> create(@RequestBody Session session) {
+        return new ResponseEntity<>(sessionService.create(session), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    @Operation(summary = "Lister toutes les sessions")
+    public ResponseEntity<List<Session>> getAll() {
+        return ResponseEntity.ok(sessionService.findAll());
+    }
 
     @GetMapping("/{id}")
-    ResponseEntity<Map<String, Object>> getById(@PathVariable String id);
+    @Operation(summary = "Récupérer une session par ID")
+    public ResponseEntity<Session> getById(@PathVariable String id) {
+        return ResponseEntity.ok(sessionService.findById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Supprimer une session")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        sessionService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
