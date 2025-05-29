@@ -12,4 +12,9 @@ public class PointageController {
         Pointage pointage = pointageService.enregistrerPointage(matriculeEtudiant, vigileId);
         return ResponseEntity.ok(pointage);
     }
+    @PostMapping("/pointer")
+    public ResponseEntity<?> pointerEtudiant(@RequestParam String matricule, @RequestParam String sessionId) {
+        return pointageService.pointerEtudiant(matricule, sessionId);
+    }
+
 }
