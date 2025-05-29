@@ -6,7 +6,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Map<String, Object> login(String login, String password) {
-        Optional<User> userOpt = userRepository.findByUsernameAndPassword(login, password);
+       Optional<User> findByLoginAndPassword(String login, String password);
 
         Map<String, Object> response = new HashMap<>();
         if (userOpt.isPresent()) {
