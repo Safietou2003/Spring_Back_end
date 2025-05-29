@@ -15,5 +15,5 @@ public interface AbsenceService {
         Evenement findById(String id);
         Page<Evenement> findByEtat(Etat etat, Pageable pageable);
         Page<Evenement> findByType(Type type, Pageable pageable);
-        Page<Evenement> findByEtudiantId(String etudiantId, Pageable pageable);
+        Page<Evenement> findByMatricule(String matricule, Pageable pageable);
 }
