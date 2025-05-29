@@ -10,17 +10,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SessionServiceImpl implements SessionService {
-    SessionRepository sessionRepository;
-    public SessionServiceImpl(SessionRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
-    }
+
+    @Autowired
+    private SessionRepository sessionRepository;
+
     @Override
-    public Page<Session> findAllPaginate(Pageable pageable) {
-        return sessionRepository.findAll(pageable);
+    public Session save(Session session) {
+        return sessionRepository.save(session);
     }
 
     @Override
-    public Session findById(String id) {
-        return sessionRepository.findById(id).orElse(null);
+    public List<Session> findAll() {
+        return sessionRepository.findAll();
+    }
+
+    @Override
+    public Optional<Session> findById(String id) {
+        return sessionRepository.findById(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        sessionRepository.deleteById(id);
     }
 }
