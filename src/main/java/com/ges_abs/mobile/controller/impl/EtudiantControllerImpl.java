@@ -21,4 +21,10 @@ public class EtudiantControllerImpl implements EtudiantController {
     public ResponseEntity<Map<String, Object>> getByMatricule(String matricule) {
         return ResponseEntity.ok(etudiantService.getEtudiantByMatricule(matricule));
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Etudiant>> search(@RequestParam String matricule) {
+        List<Etudiant> etudiants = etudiantService.searchByMatricule(matricule);
+        return ResponseEntity.ok(etudiants);
+    }
+
 }
