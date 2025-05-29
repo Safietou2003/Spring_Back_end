@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class User extends AbstractEntity {
     private String login;
+    @JsonIgnore
     private String password;
     private String nom;
     private String prenom;
