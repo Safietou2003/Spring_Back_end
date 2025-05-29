@@ -6,14 +6,19 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
+@RestController
 public class EtudiantControllerImpl implements EtudiantController {
+
+    @Autowired
+    private EtudiantService etudiantService;
+
     @Override
-    public ResponseEntity<Map<String, Object>> getAll(Pageable pageable, int page, int size) {
-        return null;
+    public ResponseEntity<Map<String, Object>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(etudiantService.getAllEtudiants(pageable));
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> getByMatricule(String matricule) {
-        return null;
+        return ResponseEntity.ok(etudiantService.getEtudiantByMatricule(matricule));
     }
 }
