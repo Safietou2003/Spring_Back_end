@@ -9,4 +9,7 @@ public interface EtudiantService {
     Map<String, Object> getAllEtudiants(Pageable pageable);
 
     Map<String, Object> getEtudiantByMatricule(String matricule);
+    
+    List<Etudiant> searchByMatricule(String matricule);
+
 }
