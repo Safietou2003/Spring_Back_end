@@ -12,5 +12,7 @@ import java.util.Optional;
 @Repository
 public interface EtudiantRepository extends MongoRepository<Etudiant, String> {
     Optional<Etudiant> findByMatricule(String matricule);
+    List<Etudiant> findByMatriculeContainingIgnoreCase(String matricule);
+
 }
 
