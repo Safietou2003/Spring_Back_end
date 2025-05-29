@@ -10,6 +10,6 @@ import com.ges_abs.data.models.enumeration.Type;
 import java.util.List;
 
 public interface AuthService {
-    Map<String, Object> login(String username, String password);
+    Map<String, Object> login(String login, String password);
 }
 
