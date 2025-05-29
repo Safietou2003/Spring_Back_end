@@ -16,11 +16,9 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
    @Override
-public Page<User> findAllPaginate(int page, int size) {
-    Pageable pageable = PageRequest.of(page, size);
-    return userRepository.findAll(pageable);
-}
-
+    public Page<User> findAllPaginate(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
 
     @Override
     public Page<User> findByRole(Role role, Pageable pageable) {
