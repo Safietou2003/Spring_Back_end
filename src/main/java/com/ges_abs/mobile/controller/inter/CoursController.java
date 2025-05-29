@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/cours")
+@RequestMapping("/api/cours")
 @Tag(name = "Cours", description = "Opérations liées aux cours")
 
 public class CoursController {
