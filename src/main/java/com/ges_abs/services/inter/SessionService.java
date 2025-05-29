@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import com.ges_abs.data.models.entity.Session;
 
 public interface SessionService {
-    Page<Session> findAllPaginate(Pageable pageable);
-    Session findById(String id);
+    Session save(Session session);
+    List<Session> findAll();
+    Optional<Session> findById(String id);
+    void delete(String id);
 }
+
