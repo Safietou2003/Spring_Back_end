@@ -10,28 +10,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EtudiantServiceImpl implements EtudiantService {
-    EtudiantRepository etudiantRepository;
-    public EtudiantServiceImpl(EtudiantRepository etudiantRepository) {
-        this.etudiantRepository = etudiantRepository;
-    }
+
+    @Autowired
+    private EtudiantRepository etudiantRepository;
+
     @Override
-    public Etudiant findById(Long id) {
-        return etudiantRepository.findById(id).orElse(null);
+    public Map<String, Object> getAllEtudiants(Pageable pageable) {
+        Page<Etudiant> pageResult = etudiantRepository.findAll(pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("etudiants", pageResult.getContent());
+        response.put("currentPage", pageResult.getNumber());
+        response.put("totalItems", pageResult.getTotalElements());
+        response.put("totalPages", pageResult.getTotalPages());
+
+        return response;
     }
 
     @Override
-    public Page<Etudiant> findAll(Pageable pageable) {
-        return etudiantRepository.findAll(pageable);
-    }
+    public Map<String, Object> getEtudiantByMatricule(String matricule) {
+        Etudiant etudiant = etudiantRepository.findByMatricule(matricule)
+                .orElseThrow(() -> new NoSuchElementException("Aucun étudiant trouvé avec le matricule : " + matricule));
 
-    @Override
-    public Page<Etudiant> findByMatricule(String matricule, Pageable pageable) {
-        return etudiantRepository.findByMatricule(matricule, pageable);
+        Map<String, Object> result = new HashMap<>();
+        result.put("etudiant", etudiant);
+        return result;
     }
-
-    @Override
-    public Etudiant FindByLoginAndPassword(String login, String password) {
-        return etudiantRepository.findByMatriculeAndPassword(login, password);
-    }
-
 }
