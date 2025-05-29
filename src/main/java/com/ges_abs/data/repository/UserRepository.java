@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.ges_abs.data.models.entity.User;
 import com.ges_abs.data.models.enumeration.Role;
-
+@Repository
 public interface UserRepository extends MongoRepository<User, String> {
     Page<User> findAll(Pageable pageable);
     Page<User> findByRole(Role role, Pageable pageable);
