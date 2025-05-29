@@ -17,6 +17,6 @@ public interface AbsenceRepository extends MongoRepository<Evenement, String> {
     Page<Evenement> findByEtat(Etat etat, Pageable pageable);
     Page<Evenement> findByType(Type type, Pageable pageable);
     Optional<Evenement> findById(long id);
-    Page<Evenement> findByEtudiant_Id(String etudiantId, Pageable pageable);
+    Page<Evenement> findByMatricule(String matricule), Pageable pageable);
     List<Evenement> findAll();
 }
