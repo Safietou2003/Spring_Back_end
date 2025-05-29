@@ -1,17 +1,21 @@
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
+@Tag(name = "Authentification", description = "Vérification")
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
+    @Operation(summary = "Connexion utilisateur")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Connexion réussie ou échouée")
+    })
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
-        try {
-            User user = userService.authenticate(credentials.get("email"), credentials.get("password"));
-            return ResponseEntity.ok(user);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
-        }
+    public ResponseEntity<Map<String, Object>> login(
+            @RequestParam String login,
+            @RequestParam String password
+    ) {
+        Map<String, Object> result = authService.login(login, password);
+        return ResponseEntity.ok(result);
     }
 }
