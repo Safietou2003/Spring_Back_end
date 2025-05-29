@@ -1,5 +1,5 @@
 @RestController
-@RequestMapping("/pointage")
+@RequestMapping("/api/pointage")
 public class PointageController {
 
     @Autowired
