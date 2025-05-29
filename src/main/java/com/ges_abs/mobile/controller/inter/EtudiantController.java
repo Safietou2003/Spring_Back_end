@@ -13,13 +13,10 @@ import java.util.Map;
 @RequestMapping("/api/etudiants")
 public interface EtudiantController {
 
-    @GetMapping("/v1")
-    ResponseEntity<Map<String, Object>> getAll(
-            @PageableDefault Pageable pageable,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size
-    );
+    @GetMapping
+    ResponseEntity<Map<String, Object>> getAll(@PageableDefault(size = 5) Pageable pageable);
 
     @GetMapping("/{matricule}")
     ResponseEntity<Map<String, Object>> getByMatricule(@PathVariable String matricule);
 }
+
