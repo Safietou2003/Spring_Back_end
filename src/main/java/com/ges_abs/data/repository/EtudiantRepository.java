@@ -9,9 +9,8 @@ import com.ges_abs.data.models.entity.Etudiant;
 
 import java.util.Optional;
 
+@Repository
 public interface EtudiantRepository extends MongoRepository<Etudiant, String> {
-    Page<Etudiant> findAll(Pageable pageable);
-    Page<Etudiant> findByMatricule(String matricule, Pageable pageable);
-    Etudiant findByMatriculeAndPassword(String matricule, String password);
-    Optional<Etudiant> findById(long id);
+    Optional<Etudiant> findByMatricule(String matricule);
 }
+
