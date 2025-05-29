@@ -6,10 +6,12 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @Operation(summary = "Connexion utilisateur")
+    @Operation(summary = "Créer un utilisateur", description = "Créer utilisateur dans la base")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Connexion réussie ou échouée")
+        @ApiResponse(responseCode = "200", description = "Utilisateur créé"),
+        @ApiResponse(responseCode = "400", description = "Requête invalide")
     })
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         Optional<User> user = userRepository.findByLoginAndPassword(
