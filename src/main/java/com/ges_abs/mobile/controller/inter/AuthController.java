@@ -11,11 +11,15 @@ public class AuthController {
         @ApiResponse(responseCode = "200", description = "Connexion réussie ou échouée")
     })
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(
-            @RequestParam String login,
-            @RequestParam String password
-    ) {
-        Map<String, Object> result = authService.login(login, password);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        Optional<User> user = userRepository.findByLoginAndPassword(
+            loginRequest.getLogin(), loginRequest.getPassword()
+        );
+
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
+        }
     }
-}
+
