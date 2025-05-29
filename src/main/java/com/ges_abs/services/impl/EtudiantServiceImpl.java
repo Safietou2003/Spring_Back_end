@@ -36,4 +36,9 @@ public class EtudiantServiceImpl implements EtudiantService {
         result.put("etudiant", etudiant);
         return result;
     }
+    @Override
+    public List<Etudiant> searchByMatricule(String matricule) {
+        return etudiantRepository.findByMatriculeContainingIgnoreCase(matricule);
+    }
+
 }
