@@ -1,4 +1,4 @@
-i@RestController
+@RestController
 @RequestMapping("/api/auth")
 @Tag(name = "Authentification", description = "Vérification")
 public class AuthController {
